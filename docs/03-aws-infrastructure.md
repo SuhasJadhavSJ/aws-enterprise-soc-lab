@@ -205,6 +205,14 @@ The subnet is intended to host internal monitored systems that should not receiv
 
 Internet accessibility will be determined by the route configuration and will be intentionally restricted.
 
+## Internet Gateway Implementation
+
+An Internet Gateway named `soc-igw` was created and attached to `soc-vpc`.
+
+The Internet Gateway provides the VPC with a connection point to the public Internet.
+
+At this stage, the public subnet is still not Internet-accessible because no default route to the Internet Gateway has been configured yet.
+
 # Future Expansion
 
 The infrastructure is intentionally designed for future additions, including:
