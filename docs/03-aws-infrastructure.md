@@ -183,6 +183,16 @@ Status: Available
 
 The VPC will serve as the isolated network boundary for the SOC infrastructure.
 
+## Public Subnet Implementation
+
+The public subnet was created successfully inside `soc-vpc`.
+
+- Name: `soc-public-subnet`
+- CIDR: `10.0.1.0/24`
+- Availability Zone: `ap-south-1a`
+
+The subnet is not yet Internet-accessible. Internet connectivity will be established after configuring the Internet Gateway and public route table.
+
 # Future Expansion
 
 The infrastructure is intentionally designed for future additions, including:
