@@ -193,6 +193,18 @@ The public subnet was created successfully inside `soc-vpc`.
 
 The subnet is not yet Internet-accessible. Internet connectivity will be established after configuring the Internet Gateway and public route table.
 
+## Private Subnet Implementation
+
+The private subnet was successfully created inside `soc-vpc`.
+
+- Name: `soc-private-subnet`
+- CIDR: `10.0.2.0/24`
+- Availability Zone: `ap-south-1a`
+
+The subnet is intended to host internal monitored systems that should not receive direct public IP addresses.
+
+Internet accessibility will be determined by the route configuration and will be intentionally restricted.
+
 # Future Expansion
 
 The infrastructure is intentionally designed for future additions, including:
