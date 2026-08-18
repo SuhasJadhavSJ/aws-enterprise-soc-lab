@@ -214,6 +214,20 @@ The Internet Gateway provides the VPC with a connection point to the public Inte
 At this stage, the public subnet is still not Internet-accessible because no default route to the Internet Gateway has been configured yet.
 
 
+## Private Route Table Implementation
+
+A private route table named `soc-private-rt` was created and associated with `soc-private-subnet`.
+
+The route table contains the local VPC route:
+
+- `10.0.0.0/16` → Local
+
+No default Internet Gateway route was configured.
+
+This prevents the private subnet from having a direct Internet route through the Internet Gateway.
+
+
+
 ## Public Route Table Implementation
 
 A public route table named `soc-public-rt` was created and associated with `soc-public-subnet`.
