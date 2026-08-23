@@ -241,6 +241,101 @@ The default route allows Internet-bound traffic from the public subnet to reach 
 
 The private subnet is intentionally not associated with this route table.
 
+## Wazuh Server EC2 Deployment
+
+The SOC server EC2 instance was successfully launched in the AWS Mumbai region.
+
+### Instance Configuration
+
+- Instance Name: `soc-server`
+- Instance Type: `m7i-flex.large`
+- Operating System: Ubuntu Server 24.04 LTS
+- VPC: `soc-vpc`
+- VPC CIDR: `10.0.0.0/16`
+- Subnet: `soc-public-subnet`
+- Subnet CIDR: `10.0.1.0/24`
+- Security Group: `soc-server-sg`
+- Root Storage: 50 GiB gp3
+- SSH Key Pair: `soc-key`
+
+### Deployment Status
+
+EC2 instance successfully launched.
+
+Infrastructure validation and SSH connectivity testing will be performed before installing Wazuh.
+
+
+## SSH Connectivity Validation
+
+SSH connectivity from the Kali Linux host to `soc-server` was successfully established.
+
+### Validated Path
+
+```text
+Kali Linux
+    ↓
+Internet
+    ↓
+AWS Internet Gateway
+    ↓
+soc-vpc
+    ↓
+soc-public-subnet
+    ↓
+soc-server-sg
+    ↓
+soc-server
+
+
+## Linux Server Baseline
+
+Baseline measurements were collected immediately after establishing SSH connectivity and before installing Wazuh.
+
+### Operating System
+
+- OS: Ubuntu 24.04.4 LTS
+- Kernel: 6.17.0-1017-aws
+- Architecture: x86_64
+
+### Compute
+
+- vCPU: 2
+- CPU model: Intel Xeon Platinum 8488C
+- RAM: 7.6 GiB
+- Swap: 0 B
+
+### Storage
+
+- Root filesystem: 48 GiB
+- Used: approximately 1.9 GiB
+- Available: approximately 46 GiB
+- Root utilization: 4%
+
+### Network
+
+- Private IP: `10.0.1.162`
+- Subnet: `10.0.1.0/24`
+- Default gateway: `10.0.1.1`
+- Network interface: `enp39s0`
+
+### Listening Services
+
+| Protocol | Port | Bind Address | Service |
+|---|---:|---|---|
+| TCP | 22 | `0.0.0.0` / `::` | SSH |
+| TCP | 53 | `127.0.0.53` / `127.0.0.54` | systemd-resolved |
+| UDP | 53 | `127.0.0.53` / `127.0.0.54` | systemd-resolved |
+| UDP | 68 | `10.0.1.162` | DHCP |
+| UDP | 323 | `127.0.0.1` / `::1` | chronyd |
+
+### Baseline Assessment
+
+The server is operational and suitable for beginning the lab. However, the instance has only 2 vCPUs compared with Wazuh's recommended 4 vCPUs for a 1–25 agent single-node quickstart deployment.
+
+The lab will therefore monitor CPU, memory, disk utilization, and Wazuh service health during deployment and investigation exercises.
+
+The absence of swap is also recorded as a baseline condition rather than treated as an error. Wazuh indexer memory management will be configured according to the official deployment guidance.
+
 # Future Expansion
 
 The infrastructure is intentionally designed for future additions, including:
